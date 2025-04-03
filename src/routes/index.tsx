@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import ImageSection from '@/components/editor/sections/image'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
@@ -9,7 +9,7 @@ function RouteComponent() {
   return (
     <div className="p-2">
       <h3>Welcome Home!</h3>
-      <Button onClick={() => console.log('click')}>Hello</Button>
+      <ImageSection />
     </div>
   )
 }

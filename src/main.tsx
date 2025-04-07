@@ -17,6 +17,7 @@ const router = createRouter({
   context: {
     queryClient,
   },
+  defaultPendingMinMs: 0,
 })
 
 // Register the router instance for type safety

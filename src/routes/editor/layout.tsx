@@ -1,4 +1,4 @@
-import { Header } from '@/features/editor/components/layout/header'
+import { Header } from '@features/editor/components/layout/header'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/editor')({

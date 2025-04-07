@@ -34,18 +34,18 @@ interface HeadingSection extends BaseSection {
   color: string
 }
 
-type Section = ImageSection | ParagraphSection | HeadingSection
+type ISection = ImageSection | ParagraphSection | HeadingSection
 
-interface Configuration {
+interface IConfiguration {
   backgroundColor: string
 }
 
-export interface Template {
+export interface ITemplate {
   id: string
   name: string
   cover: string
-  sections: Section[]
-  configuration: Configuration
+  sections: ISection[]
+  configuration: IConfiguration
 }
 
-export type TemplateListItem = Pick<Template, 'id' | 'name' | 'cover'>
+export type ITemplateListItem = Pick<ITemplate, 'id' | 'name' | 'cover'>

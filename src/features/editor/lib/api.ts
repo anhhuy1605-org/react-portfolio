@@ -1,6 +1,6 @@
-import { TemplateListItem } from '../types'
+import { ITemplateListItem } from '../types'
 
-const sampleTemplates: TemplateListItem[] = [
+const sampleTemplates: ITemplateListItem[] = [
   {
     id: '1',
     name: 'Template 1',

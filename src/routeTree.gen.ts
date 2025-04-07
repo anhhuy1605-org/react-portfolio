@@ -11,14 +11,16 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as AboutImport } from './routes/about'
+import { Route as EditorLayoutImport } from './routes/editor/layout'
 import { Route as IndexImport } from './routes/index'
+import { Route as EditorIndexImport } from './routes/editor/index'
+import { Route as EditorTemplateIdImport } from './routes/editor/$templateId'
 
 // Create/Update Routes
 
-const AboutRoute = AboutImport.update({
-  id: '/about',
-  path: '/about',
+const EditorLayoutRoute = EditorLayoutImport.update({
+  id: '/editor',
+  path: '/editor',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -26,6 +28,18 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const EditorIndexRoute = EditorIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EditorLayoutRoute,
+} as any)
+
+const EditorTemplateIdRoute = EditorTemplateIdImport.update({
+  id: '/$templateId',
+  path: '/$templateId',
+  getParentRoute: () => EditorLayoutRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -39,51 +53,84 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
+    '/editor': {
+      id: '/editor'
+      path: '/editor'
+      fullPath: '/editor'
+      preLoaderRoute: typeof EditorLayoutImport
       parentRoute: typeof rootRoute
+    }
+    '/editor/$templateId': {
+      id: '/editor/$templateId'
+      path: '/$templateId'
+      fullPath: '/editor/$templateId'
+      preLoaderRoute: typeof EditorTemplateIdImport
+      parentRoute: typeof EditorLayoutImport
+    }
+    '/editor/': {
+      id: '/editor/'
+      path: '/'
+      fullPath: '/editor/'
+      preLoaderRoute: typeof EditorIndexImport
+      parentRoute: typeof EditorLayoutImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface EditorLayoutRouteChildren {
+  EditorTemplateIdRoute: typeof EditorTemplateIdRoute
+  EditorIndexRoute: typeof EditorIndexRoute
+}
+
+const EditorLayoutRouteChildren: EditorLayoutRouteChildren = {
+  EditorTemplateIdRoute: EditorTemplateIdRoute,
+  EditorIndexRoute: EditorIndexRoute,
+}
+
+const EditorLayoutRouteWithChildren = EditorLayoutRoute._addFileChildren(
+  EditorLayoutRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/editor': typeof EditorLayoutRouteWithChildren
+  '/editor/$templateId': typeof EditorTemplateIdRoute
+  '/editor/': typeof EditorIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/editor/$templateId': typeof EditorTemplateIdRoute
+  '/editor': typeof EditorIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
+  '/editor': typeof EditorLayoutRouteWithChildren
+  '/editor/$templateId': typeof EditorTemplateIdRoute
+  '/editor/': typeof EditorIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/' | '/editor' | '/editor/$templateId' | '/editor/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/editor/$templateId' | '/editor'
+  id: '__root__' | '/' | '/editor' | '/editor/$templateId' | '/editor/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
+  EditorLayoutRoute: typeof EditorLayoutRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
+  EditorLayoutRoute: EditorLayoutRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +144,26 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/editor"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/about": {
-      "filePath": "about.tsx"
+    "/editor": {
+      "filePath": "editor/layout.tsx",
+      "children": [
+        "/editor/$templateId",
+        "/editor/"
+      ]
+    },
+    "/editor/$templateId": {
+      "filePath": "editor/$templateId.tsx",
+      "parent": "/editor"
+    },
+    "/editor/": {
+      "filePath": "editor/index.tsx",
+      "parent": "/editor"
     }
   }
 }

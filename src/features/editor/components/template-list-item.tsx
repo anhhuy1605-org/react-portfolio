@@ -9,11 +9,11 @@ interface Props {
 export function TemplateListItem({ template }: Props) {
   return (
     <Link to="/editor/$templateId" params={{ templateId: template.id }} className="w-full">
-      <Card className="overflow-hidden h-full flex flex-col">
+      <Card className="overflow-hidden h-full flex flex-col py-0 gap-4">
         <div className="relative aspect-[4/3] w-full overflow-hidden">
-          <img src={template.cover || '/placeholder.svg'} alt={template.name} className="object-cover transition-transform hover:scale-105 duration-500" />
+          <img src={template.cover || '/placeholder.svg'} alt={template.name} className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
         </div>
-        <CardFooter className="flex flex-col items-start p-4">
+        <CardFooter className="flex flex-col items-start p-4 pt-0">
           <h3 className="text-lg font-medium">{template.name}</h3>
         </CardFooter>
       </Card>

@@ -1,4 +1,4 @@
-import { ITemplateListItem } from '../types'
+import { ITemplateListItem } from '../types/template.types'
 import { TemplateListItem } from './template-list-item'
 
 interface Props {

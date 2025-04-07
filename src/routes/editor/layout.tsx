@@ -7,9 +7,11 @@ export const Route = createFileRoute('/editor')({
 
 function RouteComponent() {
   return (
-    <>
+    <div className="h-full flex flex-col">
       <Header />
-      <Outlet />
-    </>
+      <main className="grow-1">
+        <Outlet />
+      </main>
+    </div>
   )
 }

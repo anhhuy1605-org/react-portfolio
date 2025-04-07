@@ -1,5 +1,7 @@
-function ImageSection() {
-  return <img />
+interface Props {
+  url: string
 }
 
-export { ImageSection }
+export function ImageSection({ url }: Props) {
+  return <img src={url} />
+}

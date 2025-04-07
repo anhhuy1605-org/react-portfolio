@@ -1,5 +1,5 @@
 import { Card, CardFooter } from '@/components/ui/card'
-import { ITemplateListItem } from '../types'
+import { ITemplateListItem } from '../types/template.types'
 import { Link } from '@tanstack/react-router'
 
 interface Props {

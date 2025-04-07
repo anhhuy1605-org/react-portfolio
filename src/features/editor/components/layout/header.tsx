@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Link } from '@tanstack/react-router'
 
-export const Header = () => {
+export function Header() {
   return (
     <header className="w-full border-b flex justify-center">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">

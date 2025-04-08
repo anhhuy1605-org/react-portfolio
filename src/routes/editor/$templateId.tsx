@@ -1,9 +1,10 @@
 import { Editor } from '@/features/editor/components/editor'
+import { NotFound } from '@/features/editor/components/layout/not-found'
 import { SectionPanel } from '@/features/editor/components/section-panel'
 import { useEditor } from '@/features/editor/hooks/editor.hooks'
 import { fetchTemplate } from '@/features/editor/lib/api'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, notFound } from '@tanstack/react-router'
 import { useEffect } from 'react'
 
 const fetchTemplateOptions = (id: string) => queryOptions({
@@ -14,9 +15,14 @@ const fetchTemplateOptions = (id: string) => queryOptions({
 export const Route = createFileRoute('/editor/$templateId')({
   loader: async ({ context, params }) => {
     const queryClient = context.queryClient
-    await queryClient.ensureQueryData(fetchTemplateOptions(params.templateId))
+    try {
+      await queryClient.ensureQueryData(fetchTemplateOptions(params.templateId))
+    } catch (error) {
+      throw notFound()
+    }
   },
   component: RouteComponent,
+  notFoundComponent: NotFound,
 })
 
 function RouteComponent() {

@@ -1,5 +1,7 @@
 import { AlignOption } from '@/features/editor/constants'
-import { ToggleGroup, ToggleGroupItem } from '@radix-ui/react-toggle-group'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { useCallback } from 'react'
+import { AlignCenter, AlignLeft, AlignRight } from 'lucide-react'
 
 interface Props {
   value: AlignOption
@@ -7,13 +9,27 @@ interface Props {
 }
 
 export function AlignInput({ value, onValueChange }: Props) {
-  // TODO: icon
+  const toggleOnValueChange = useCallback((value: AlignOption) => {
+    if (value) {
+      onValueChange(value)
+    }
+  }, [])
   return (
     <div className="flex gap-2">
-      <ToggleGroup type="single" value={value} onValueChange={onValueChange}>
-        <ToggleGroupItem value={AlignOption.LEFT}>Left</ToggleGroupItem>
-        <ToggleGroupItem value={AlignOption.CENTER}>Center</ToggleGroupItem>
-        <ToggleGroupItem value={AlignOption.RIGHT}>Right</ToggleGroupItem>
+      <ToggleGroup
+        type="single"
+        value={value}
+        onValueChange={toggleOnValueChange}
+      >
+        <ToggleGroupItem value={AlignOption.LEFT}>
+          <AlignLeft className="h-8 w-8" />
+        </ToggleGroupItem>
+        <ToggleGroupItem value={AlignOption.CENTER}>
+          <AlignCenter className="h-8 w-8" />
+        </ToggleGroupItem>
+        <ToggleGroupItem value={AlignOption.RIGHT}>
+          <AlignRight className="h-8 w-8" />
+        </ToggleGroupItem>
       </ToggleGroup>
     </div>
   )

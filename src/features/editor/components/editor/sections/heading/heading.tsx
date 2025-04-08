@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 
 interface Props {
   section: IHeadingSection
-  children: ReactNode
+  children?: ReactNode
 }
 
 export function HeadingSection({ section, children }: Props) {

@@ -13,12 +13,12 @@ export function ImageSection({ section }: Props) {
   }
 
   const imgStyle = {
-    width: section.width || '50%',
+    width: section.width ? `${section.width}%` : '50%',
   }
 
   return (
     <div style={containerStyle}>
-      <img src={section.url} alt={section.alt} style={imgStyle} />
+      <img src={section.url} style={imgStyle} />
     </div>
   )
 }

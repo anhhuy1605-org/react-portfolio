@@ -13,27 +13,20 @@ export interface IGlobalSection extends BaseSection {
 export interface IImageSection extends BaseSection {
   type: SectionType.IMAGE
   url: string
-  backgroundColor: string
   align: AlignOption
-  width: string
-  alt?: string
+  width: number
 }
 
 export interface IParagraphSection extends BaseSection {
   type: SectionType.PARAGRAPH
   content: string
-  backgroundColor: string
   align: AlignOption
-  fontSize: string
-  fontWeight: string
   color: string
 }
 
 export interface IHeadingSection extends BaseSection {
   type: SectionType.HEADING
   content: string
-  level: 1 | 2 | 3 | 4 | 5 | 6
-  backgroundColor: string
   align: AlignOption
   color: string
 }

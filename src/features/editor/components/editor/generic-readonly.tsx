@@ -11,35 +11,27 @@ interface Props {
 function getComponent(section: ISection) {
   if (section.type === SectionType.HEADING) {
     return (
-      <HeadingSection>
-        {section.content}
-      </HeadingSection>
+      <HeadingSection section={section} />
     )
   }
 
   if (section.type === SectionType.PARAGRAPH) {
     return (
-      <ParagraphSection>
-        {section.content}
-      </ParagraphSection>
+      <ParagraphSection section={section} />
     )
   }
 
   if (section.type === SectionType.IMAGE) {
     return (
-      <ImageSection url={section.url} />
+      <ImageSection section={section} />
     )
   }
 
   return null
 }
 
-export function GenericSection({ section }: Props) {
+export function GenericReadonlySection({ section }: Props) {
   const component = getComponent(section)
 
-  return (
-    <div>
-      {component}
-    </div>
-  )
+  return component
 }

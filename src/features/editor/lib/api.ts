@@ -12,6 +12,7 @@ const sampleTemplates: ITemplate[] = [
         type: SectionType.IMAGE,
         url: 'https://picsum.photos/300/200',
         align: AlignOption.CENTER,
+        width: 50,
       },
       {
         id: '2',
@@ -25,7 +26,7 @@ const sampleTemplates: ITemplate[] = [
       },
     ],
     configuration: {
-      backgroundColor: '#000000',
+      backgroundColor: '#ffffff',
     },
   },
   {

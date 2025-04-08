@@ -9,7 +9,7 @@ function RouteComponent() {
   return (
     <div className="h-full flex flex-col">
       <Header />
-      <main className="grow-1">
+      <main className="grow-1 bg-gray-100">
         <Outlet />
       </main>
     </div>

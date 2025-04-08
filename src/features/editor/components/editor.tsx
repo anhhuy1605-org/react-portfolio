@@ -1,30 +1,22 @@
-import { useState } from 'react'
+import { Card } from '@/components/ui/card'
 import { useEditor } from '../hooks/editor.hooks'
 import { GenericSection } from './editor/generic'
-import { createPortal } from 'react-dom'
+import { IFrame } from '@/components/ui/iframe'
 
 export function Editor() {
-  const [iframeRef, setIframeRef] = useState<HTMLIFrameElement | null>(null)
-  const mountNode = iframeRef?.contentWindow?.document?.body
-
   const { sections } = useEditor()
 
   const rendered = sections.map(section => <GenericSection section={section} key={section.id}></GenericSection>)
 
-  const onLoad = (event) => {
-    const iframe = event.target as HTMLIFrameElement
-    if (!iframe?.contentDocument) {
-      return
-    }
-
-    setIframeRef(iframe)
-  }
-
   return (
     <>
-      <iframe className="w-full h-full" onLoad={onLoad}>
-        {mountNode && createPortal(rendered, mountNode)}
-      </iframe>
+      <div className="w-[600px] h-[800px]">
+        <Card className="w-full h-full px-8 py-4">
+          <IFrame>
+            {rendered}
+          </IFrame>
+        </Card>
+      </div>
     </>
   )
 }

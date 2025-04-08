@@ -1,3 +1,4 @@
+import { H2 } from '@/components/ui/typography'
 import { TemplateList } from '@/features/editor/components/template-list'
 import { fetchTemplates } from '@/features/editor/lib/api'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
@@ -21,9 +22,9 @@ function RouteComponent() {
   const { data: templates } = useSuspenseQuery(fetchTemplatesOptions)
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full h-full flex justify-center items-center p-4 md:p-12 xl:p-24">
       <div className="container flex flex-col gap-4 items-center">
-        <h1>Choose a template to start</h1>
+        <H2 className="text-center">Choose a template to start</H2>
         <TemplateList templates={templates} />
       </div>
     </div>

@@ -36,11 +36,11 @@ function RouteComponent() {
   }, [template])
 
   return (
-    <div className="flex bg-gray-100 h-full">
-      <div className="w-2/3">
+    <div className="flex h-full">
+      <div className="w-2/3 flex justify-center items-center">
         <Editor />
       </div>
-      <div className="w-1/3">
+      <div className="w-1/3 bg-white shadow-md">
         <SectionPanel />
       </div>
     </div>

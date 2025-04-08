@@ -38,5 +38,6 @@ export default [
     semi: false,
     jsx: true,
     commaDangle: 'always-multiline',
+    braceStyle: ['stroustrup', { allowSingleLine: true }],
   }),
 ]

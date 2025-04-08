@@ -10,7 +10,7 @@ export interface IGlobalSection extends BaseSection {
   backgroundColor: string
 }
 
-interface IImageSection extends BaseSection {
+export interface IImageSection extends BaseSection {
   type: SectionType.IMAGE
   url: string
   backgroundColor: string
@@ -19,7 +19,7 @@ interface IImageSection extends BaseSection {
   alt?: string
 }
 
-interface IParagraphSection extends BaseSection {
+export interface IParagraphSection extends BaseSection {
   type: SectionType.PARAGRAPH
   content: string
   backgroundColor: string
@@ -29,7 +29,7 @@ interface IParagraphSection extends BaseSection {
   color: string
 }
 
-interface IHeadingSection extends BaseSection {
+export interface IHeadingSection extends BaseSection {
   type: SectionType.HEADING
   content: string
   level: 1 | 2 | 3 | 4 | 5 | 6

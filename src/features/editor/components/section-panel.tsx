@@ -1,9 +1,12 @@
 import { useEditor } from '../hooks/editor.hooks'
+import { GenericPanel } from './editor/generic-panel'
 
 export function SectionPanel() {
   const { selectedSection } = useEditor()
 
   return (
-    <div>{JSON.stringify(selectedSection)}</div>
+    <>
+      { selectedSection && <GenericPanel section={selectedSection} /> }
+    </>
   )
 }

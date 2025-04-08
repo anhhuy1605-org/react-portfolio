@@ -1,9 +1,9 @@
 import { SectionType } from '../../constants'
 import { useEditor } from '../../hooks/editor.hooks'
 import { ISection } from '../../types/template.types'
-import { HeadingSection } from './heading'
-import { ImageSection } from './image'
-import { ParagraphSection } from './paragraph'
+import { HeadingPanel } from './sections/heading/heading-panel'
+import { ImagePanel } from './sections/image/image-panel'
+import { ParagraphPanel } from './sections/paragraph/paragraph-panel'
 
 interface Props {
   section: ISection
@@ -12,34 +12,30 @@ interface Props {
 function getComponent(section: ISection) {
   if (section.type === SectionType.HEADING) {
     return (
-      <HeadingSection>
-        {section.content}
-      </HeadingSection>
+      <HeadingPanel section={section} />
     )
   }
 
   if (section.type === SectionType.PARAGRAPH) {
     return (
-      <ParagraphSection>
-        {section.content}
-      </ParagraphSection>
+      <ParagraphPanel section={section} />
     )
   }
 
   if (section.type === SectionType.IMAGE) {
     return (
-      <ImageSection url={section.url} />
+      <ImagePanel section={section} />
     )
   }
 }
 
-export function GenericSection({ section }: Props) {
+export function GenericPanel({ section }: Props) {
   const component = getComponent(section)
 
   const { selectSection } = useEditor()
   return (
-    <div onClick={() => selectSection(section)}>
+    <>
       {component}
-    </div>
+    </>
   )
 }

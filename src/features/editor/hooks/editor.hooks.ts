@@ -15,6 +15,7 @@ export function useEditor() {
   })
   const setInitialize = useEditorStore(state => state.setInitialize)
   const setSelectedSectionId = useEditorStore(state => state.setSelectedSectionId)
+  const setUpdateSection = useEditorStore(state => state.setUpdateSection)
 
   const initialize = (template: ITemplate) => {
     const globalConfig = { ...template.configuration, id: SectionType.GLOBAL, type: SectionType.GLOBAL }
@@ -25,11 +26,16 @@ export function useEditor() {
     setSelectedSectionId(section.id)
   }
 
+  const updateSection = (sectionId: string, newSectionData: Omit<IEditorSection, 'id'>) => {
+    setUpdateSection(sectionId, newSectionData)
+  }
+
   return {
     sections,
     globalSection,
     selectedSection,
     initialize,
     selectSection,
+    updateSection,
   }
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useEditor } from '../hooks/editor.hooks'
-import { GenericSection } from './sections/generic'
+import { GenericSection } from './editor/generic'
 import { createPortal } from 'react-dom'
 
 export function Editor() {

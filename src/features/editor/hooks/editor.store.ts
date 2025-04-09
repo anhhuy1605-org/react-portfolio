@@ -13,8 +13,8 @@ interface EditorActions {
   setInitialize: (sections: IEditorSection[], globalSection: IGlobalSection) => void
   setInsertBeforeSection: (sectionId: string, newSection: IEditorSection) => void
   setInsertAfterSection: (sectionId: string, newSection: IEditorSection) => void
-  setUpdateSection: (sectionId: string, newSectionData: Omit<IEditorSection, 'id'>) => void
-  setUpdateGlobalSection: (newGlobalSectionData: Omit<IGlobalSection, 'id'>) => void
+  setUpdateSection: (sectionId: string, newSectionData: Partial<IEditorSection>) => void
+  setUpdateGlobalSection: (newGlobalSectionData: Partial<IGlobalSection>) => void
   setDeleteSection: (sectionId: string) => void
   setSelectedSectionId: (sectionId: string) => void
 }

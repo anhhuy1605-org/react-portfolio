@@ -1,37 +1,45 @@
 import { SectionType } from '../../constants'
+import { useEditorStore } from '../../hooks/editor.store'
 import { ISection } from '../../types/template.types'
 import { HeadingSection } from './sections/heading/heading'
 import { ImageSection } from './sections/image/image'
 import { ParagraphSection } from './sections/paragraph/paragraph'
 
 interface Props {
-  section: ISection
+  sectionId: string
 }
 
 function getComponent(section: ISection) {
   if (section.type === SectionType.HEADING) {
     return (
-      <HeadingSection section={section} />
+      <HeadingSection sectionId={section.id} />
     )
   }
 
   if (section.type === SectionType.PARAGRAPH) {
     return (
-      <ParagraphSection section={section} />
+      <ParagraphSection sectionId={section.id} />
     )
   }
 
   if (section.type === SectionType.IMAGE) {
     return (
-      <ImageSection section={section} />
+      <ImageSection sectionId={section.id} />
     )
   }
 
   return null
 }
 
-export function GenericReadonlySection({ section }: Props) {
-  const component = getComponent(section)
+export function GenericReadonlySection({ sectionId }: Props) {
+  const section = useEditorStore((state) => {
+    return state.sections.find(section => section.id === sectionId)
+  })
 
-  return component
+  const component = getComponent(section!)
+  return (
+    <>
+      {component}
+    </>
+  )
 }

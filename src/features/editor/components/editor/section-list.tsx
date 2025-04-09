@@ -1,16 +1,17 @@
 import { IFrame } from '@/components/ui/iframe'
-import { useEditor } from '../../hooks/editor.hooks'
 import { GenericSection } from '../editor/generic'
 import { useCallback, useState } from 'react'
+import { useEditorStore } from '../../hooks/editor.store'
 
 export function SectionList() {
   const [iframeRef, setIframeRef] = useState<HTMLIFrameElement | null>(null)
-  const { sections, globalSection } = useEditor()
-  const rendered = sections.map(section => <GenericSection section={section} key={section.id}></GenericSection>)
+  const sections = useEditorStore(state => state.sections)
+  const globalBackgroundColor = useEditorStore(state => state.globalSection?.backgroundColor)
+  const rendered = sections.map(section => <GenericSection sectionId={section.id} key={section.id}></GenericSection>)
 
   const style = {
     padding: '16px',
-    backgroundColor: globalSection?.backgroundColor,
+    backgroundColor: globalBackgroundColor,
   }
 
   const onIframeRef = useCallback((iframe: HTMLIFrameElement | null) => {

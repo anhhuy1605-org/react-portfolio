@@ -1,20 +1,21 @@
 import { H4 } from '@/components/ui/typography'
-import { useEditor } from '@/features/editor/hooks/editor.hooks'
 import { ColorInput } from '../../inputs/color'
-import { IGlobalSection } from '@/features/editor/types/template.types'
+import { useEditorStore } from '@/features/editor/hooks/editor.store'
+import { useCallback } from 'react'
 
-interface Props {
-  section: IGlobalSection
-}
+export function GlobalPanel() {
+  const backgroundColor = useEditorStore(state => state.globalSection?.backgroundColor)!
+  const setUpdateGlobalSection = useEditorStore(state => state.setUpdateGlobalSection)
 
-export function GlobalPanel({ section }: Props) {
-  const { updateGlobalSection } = useEditor()
+  const updateBackgroundColor = useCallback((value: string) => {
+    setUpdateGlobalSection({ backgroundColor: value })
+  }, [])
 
   return (
     <div className="space-y-6">
       <div className="space-y-2">
         <H4>Background color</H4>
-        <ColorInput value={section.backgroundColor} onValueChange={(value) => { updateGlobalSection({ backgroundColor: value }) }} />
+        <ColorInput value={backgroundColor} onValueChange={updateBackgroundColor} />
       </div>
     </div>
   )

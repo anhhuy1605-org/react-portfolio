@@ -1,8 +1,8 @@
 import { IFrame } from '@/components/ui/iframe'
-import { useEditor } from '../../hooks/editor.hooks'
 import { Ref, useCallback, useEffect, useImperativeHandle, useState } from 'react'
 import { tidyHTML } from '../../lib/utils'
 import { GenericReadonlySection } from './generic-readonly'
+import { useEditorStore } from '../../hooks/editor.store'
 
 export interface Handle {
   getHTMLContent(): string
@@ -16,13 +16,14 @@ interface Props {
 // TODO: combine with SectionList
 export function SectionListReadOnly({ ref, onHtmlChange }: Props) {
   const [iframeRef, setIframeRef] = useState<HTMLIFrameElement | null>(null)
-  const { sections, globalSection } = useEditor()
-  const list = sections.map(section => <GenericReadonlySection section={section} key={section.id}></GenericReadonlySection>)
+  const sections = useEditorStore(state => state.sections)
+  const globalBackgroundColor = useEditorStore(state => state.globalSection?.backgroundColor)
+  const list = sections.map(section => <GenericReadonlySection sectionId={section.id} key={section.id}></GenericReadonlySection>)
   const htmlContent = iframeRef?.contentWindow?.document?.documentElement?.outerHTML
 
   const style = {
     padding: '16px',
-    backgroundColor: globalSection?.backgroundColor,
+    backgroundColor: globalBackgroundColor,
   }
 
   useImperativeHandle(ref, () => ({

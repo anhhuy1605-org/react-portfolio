@@ -10,6 +10,7 @@ import {
 import { Handle, SectionListReadOnly } from './editor/section-list-readonly'
 import { highlightElement } from '@speed-highlight/core'
 import { useEffect, useRef, useState } from 'react'
+import { toast } from 'sonner'
 
 export function ModalExport() {
   const htmlViewRef = useRef<HTMLPreElement>(null)
@@ -19,6 +20,9 @@ export function ModalExport() {
   const copyToClipboard = () => {
     if (sectionListRef.current) {
       navigator.clipboard.writeText(sectionListRef.current.getHTMLContent())
+      toast('✅ Copied to clipboard!', {
+        position: 'top-right',
+      })
     }
   }
 

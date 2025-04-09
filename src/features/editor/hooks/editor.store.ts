@@ -17,8 +17,11 @@ interface EditorActions {
   setUpdateGlobalSection: (newGlobalSectionData: Partial<IGlobalSection>) => void
   setDeleteSection: (sectionId: string) => void
   setSelectedSectionId: (sectionId: string) => void
+  setMoveUp: (sectionId: string) => void
+  setMoveDown: (sectionId: string) => void
 }
 
+// TODO: refactor actions
 export const useEditorStore = create<EditorState & EditorActions>(set => ({
   sections: [],
   globalSection: null,
@@ -84,4 +87,36 @@ export const useEditorStore = create<EditorState & EditorActions>(set => ({
   }),
 
   setSelectedSectionId: sectionId => set(state => ({ selectedSectionId: sectionId })),
+
+  setMoveUp: sectionId => set((state) => {
+    const index = state.sections.findIndex(section => section.id === sectionId)
+
+    if (index <= 0) return state
+
+    const newSections = [...state.sections]
+
+    const temp = newSections[index]
+    newSections[index] = newSections[index - 1]
+    newSections[index - 1] = temp
+
+    return {
+      sections: newSections,
+    }
+  }),
+
+  setMoveDown: sectionId => set((state) => {
+    const index = state.sections.findIndex(section => section.id === sectionId)
+
+    if (index === -1 || index >= state.sections.length - 1) return state
+
+    const newSections = [...state.sections]
+
+    const temp = newSections[index]
+    newSections[index] = newSections[index + 1]
+    newSections[index + 1] = temp
+
+    return {
+      sections: newSections,
+    }
+  }),
 }))

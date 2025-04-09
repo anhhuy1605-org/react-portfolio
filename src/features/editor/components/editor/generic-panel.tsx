@@ -1,5 +1,6 @@
 import { SectionType } from '../../constants'
 import { useEditorStore } from '../../hooks/editor.store'
+import { ElementPanel } from './sections/element-panel'
 import { GlobalPanel } from './sections/global/global-panel'
 import { HeadingPanel } from './sections/heading/heading-panel'
 import { ImagePanel } from './sections/image/image-panel'
@@ -29,10 +30,20 @@ export function GenericPanel() {
     return state.sections.find(section => section.id === state.selectedSectionId)?.type
   })
   const component = getComponent(selectedSectionType)
+  const isElement = selectedSectionType !== SectionType.GLOBAL
 
   return (
     <>
       {component}
+
+      {isElement && (
+        <>
+          <hr className="mt-6" />
+          <div className="mt-6">
+            <ElementPanel />
+          </div>
+        </>
+      )}
     </>
   )
 }

@@ -38,13 +38,22 @@ export function GenericSection({ sectionId }: Props) {
   const section = useEditorStore((state) => {
     return state.sections.find(section => section.id === sectionId)
   })
+  const selectedSectionId = useEditorStore(state => state.selectedSectionId)
   const setSelectedSectionId = useEditorStore(state => state.setSelectedSectionId)
   const onClick = () => {
     setSelectedSectionId(sectionId)
   }
   const component = getComponent(section!)
+  const style = {
+    cursor: 'pointer',
+    ...(sectionId === selectedSectionId
+      ? {
+          outline: '1px solid #2563eb',
+        }
+      : {}),
+  }
   return (
-    <div onClick={onClick} style={{ cursor: 'pointer' }}>
+    <div onClick={onClick} style={style}>
       {component}
     </div>
   )

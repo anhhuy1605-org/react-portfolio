@@ -1,19 +1,18 @@
 import { create } from 'zustand'
-import { IEditorSection } from '../types/editor.types'
-import { IGlobalSection, IHeadingSection, IImageSection, IParagraphSection } from '../types/template.types'
+import { IGlobalSection, IHeadingSection, IImageSection, IParagraphSection, ISection } from '../types/template.types'
 import { SectionType } from '../constants'
 
 interface EditorState {
-  sections: IEditorSection[]
+  sections: ISection[]
   globalSection: IGlobalSection | null
   selectedSectionId: string
 }
 
 interface EditorActions {
-  setInitialize: (sections: IEditorSection[], globalSection: IGlobalSection) => void
-  setInsertBeforeSection: (sectionId: string, newSection: IEditorSection) => void
-  setInsertAfterSection: (sectionId: string, newSection: IEditorSection) => void
-  setUpdateSection: (sectionId: string, newSectionData: Partial<IEditorSection>) => void
+  setInitialize: (sections: ISection[], globalSection: IGlobalSection) => void
+  setInsertBeforeSection: (sectionId: string, newSection: ISection) => void
+  setInsertAfterSection: (sectionId: string, newSection: ISection) => void
+  setUpdateSection: (sectionId: string, newSectionData: Partial<ISection>) => void
   setUpdateGlobalSection: (newGlobalSectionData: Partial<IGlobalSection>) => void
   setDeleteSection: (sectionId: string) => void
   setSelectedSectionId: (sectionId: string) => void

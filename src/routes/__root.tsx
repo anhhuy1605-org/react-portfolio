@@ -12,5 +12,5 @@ export const Route = createRootRouteWithContext<{
       <TanStackRouterDevtools />
     </>
   ),
-  notFoundComponent: () => <NotFound />
+  notFoundComponent: () => <NotFound />,
 })

@@ -1,14 +1,13 @@
 import { Card } from '@/components/ui/card'
-import { useEditor } from '../hooks/editor.hooks'
-
 import { SectionList } from './editor/section-list'
+import { useEditorStore } from '../hooks/editor.store'
 
 export function Editor() {
-  const { globalSection } = useEditor()
+  const backgroundColor = useEditorStore(state => state.globalSection?.backgroundColor)
 
   // Set background for iframe wrapper
   const style = {
-    backgroundColor: globalSection?.backgroundColor,
+    backgroundColor,
   }
   return (
     <>

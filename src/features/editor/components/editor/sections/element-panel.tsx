@@ -4,6 +4,7 @@ import { ModalInsert } from './modal-insert'
 import { useEditorStore } from '@/features/editor/hooks/editor.store'
 import { AlignOption, SectionType } from '@/features/editor/constants'
 import { ModalDelete } from './modal-delete'
+import { IHeadingSection, IImageSection, IParagraphSection } from '@/features/editor/types/template.types'
 
 const generateNewElement = (type: SectionType) => {
   if (type === SectionType.HEADING) {
@@ -13,7 +14,7 @@ const generateNewElement = (type: SectionType) => {
       content: 'Lorem heading',
       align: AlignOption.LEFT,
       color: '#000000',
-    }
+    } as IHeadingSection
   }
   if (type === SectionType.PARAGRAPH) {
     return {
@@ -22,7 +23,7 @@ const generateNewElement = (type: SectionType) => {
       content: 'Lorem paragraph',
       align: AlignOption.LEFT,
       color: '#000000',
-    }
+    } as IParagraphSection
   }
   if (type === SectionType.IMAGE) {
     return {
@@ -31,11 +32,11 @@ const generateNewElement = (type: SectionType) => {
       url: 'https://picsum.photos/id/100/300/200',
       align: AlignOption.CENTER,
       width: 50,
-    }
+    } as IImageSection
   }
 }
 
-export function ElementPanel({ sectionId }) {
+export function ElementPanel() {
   const selectedSectionId = useEditorStore(state => state.selectedSectionId)
   const setSelectedSectionId = useEditorStore(state => state.setSelectedSectionId)
   const setInsertBeforeSection = useEditorStore(state => state.setInsertBeforeSection)
@@ -46,12 +47,12 @@ export function ElementPanel({ sectionId }) {
 
   const onInsertBefore = (type: SectionType) => {
     const newElement = generateNewElement(type)
-    setInsertBeforeSection(selectedSectionId, newElement)
+    setInsertBeforeSection(selectedSectionId, newElement!)
   }
 
   const onInsertAfter = (type: SectionType) => {
     const newElement = generateNewElement(type)
-    setInsertAfterSection(selectedSectionId, newElement)
+    setInsertAfterSection(selectedSectionId, newElement!)
   }
 
   const onDelete = () => {

@@ -5,6 +5,7 @@ import { SectionPanel } from '@/features/editor/components/section-panel'
 import { SectionType } from '@/features/editor/constants'
 import { useEditorStore } from '@/features/editor/hooks/editor.store'
 import { fetchTemplate } from '@/features/editor/lib/api'
+import { IGlobalSection } from '@/features/editor/types/template.types'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute, notFound } from '@tanstack/react-router'
 import { MouseEventHandler, useEffect, useState } from 'react'
@@ -38,7 +39,7 @@ function RouteComponent() {
   const setInitialize = useEditorStore(state => state.setInitialize)
 
   useEffect(() => {
-    const globalConfig = { ...template.configuration, id: SectionType.GLOBAL, type: SectionType.GLOBAL }
+    const globalConfig = { ...template.configuration, id: SectionType.GLOBAL, type: SectionType.GLOBAL } as IGlobalSection
     setInitialize(template.sections, globalConfig)
     setPortalTarget(document.getElementById('header-actions-portal') as HTMLDivElement)
   }, [])

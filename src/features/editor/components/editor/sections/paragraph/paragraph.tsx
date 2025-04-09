@@ -1,3 +1,4 @@
+import { AlignOption } from '@/features/editor/constants'
 import { IParagraphSection } from '@/features/editor/types/template.types'
 import { ReactNode } from 'react'
 
@@ -8,5 +9,16 @@ interface Props {
 
 export function ParagraphSection({ children, section }: Props) {
   const content = children ?? section.content
-  return <p>{content}</p>
+
+  const containerStyle = {
+    display: 'flex',
+    justifyContent: section.align === AlignOption.LEFT ? 'flex-start' : section.align === AlignOption.CENTER ? 'center' : 'flex-end',
+    color: section.color,
+  }
+
+  return (
+    <div style={containerStyle}>
+      <p>{content}</p>
+    </div>
+  )
 }

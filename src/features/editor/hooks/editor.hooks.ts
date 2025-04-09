@@ -1,6 +1,6 @@
 import { SectionType } from '../constants'
 import { IEditorSection } from '../types/editor.types'
-import { ITemplate } from '../types/template.types'
+import { IGlobalSection, ITemplate } from '../types/template.types'
 import { useEditorStore } from './editor.store'
 
 export function useEditor() {
@@ -16,6 +16,7 @@ export function useEditor() {
   const setInitialize = useEditorStore(state => state.setInitialize)
   const setSelectedSectionId = useEditorStore(state => state.setSelectedSectionId)
   const setUpdateSection = useEditorStore(state => state.setUpdateSection)
+  const setUpdateGlobalSection = useEditorStore(state => state.setUpdateGlobalSection)
 
   const initialize = (template: ITemplate) => {
     const globalConfig = { ...template.configuration, id: SectionType.GLOBAL, type: SectionType.GLOBAL }
@@ -30,6 +31,10 @@ export function useEditor() {
     setUpdateSection(sectionId, newSectionData)
   }
 
+  const updateGlobalSection = (newSectionData: Omit<IGlobalSection, 'id'>) => {
+    setUpdateGlobalSection(newSectionData)
+  }
+
   return {
     sections,
     globalSection,
@@ -37,5 +42,6 @@ export function useEditor() {
     initialize,
     selectSection,
     updateSection,
+    updateGlobalSection,
   }
 }

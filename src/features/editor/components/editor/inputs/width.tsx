@@ -11,7 +11,7 @@ export function WidthInput({ value, onValueChange }: Props) {
     <Slider
       value={[value]}
       onValueChange={sliderOnValueChange}
-      defaultValue={[50]}
+      min={10}
       max={100}
       step={1}
     />

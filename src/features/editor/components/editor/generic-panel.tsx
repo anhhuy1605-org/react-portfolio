@@ -1,6 +1,6 @@
 import { SectionType } from '../../constants'
-import { useEditor } from '../../hooks/editor.hooks'
 import { ISection } from '../../types/template.types'
+import { GlobalPanel } from './sections/global/global-panel'
 import { HeadingPanel } from './sections/heading/heading-panel'
 import { ImagePanel } from './sections/image/image-panel'
 import { ParagraphPanel } from './sections/paragraph/paragraph-panel'
@@ -27,12 +27,17 @@ function getComponent(section: ISection) {
       <ImagePanel section={section} />
     )
   }
+
+  if (section.type === SectionType.GLOBAL) {
+    return (
+      <GlobalPanel section={section} />
+    )
+  }
 }
 
 export function GenericPanel({ section }: Props) {
   const component = getComponent(section)
 
-  const { selectSection } = useEditor()
   return (
     <>
       {component}

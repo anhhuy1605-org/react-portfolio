@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button'
 import { Editor } from '@/features/editor/components/editor'
 import { NotFound } from '@/features/editor/components/layout/not-found'
 import { ModalExport } from '@/features/editor/components/modal-export'

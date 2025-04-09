@@ -42,7 +42,7 @@ export function ModalExport() {
           <div className="w-1/2">
             <SectionListReadOnly ref={sectionListRef} onHtmlChange={setHtmlContent} />
           </div>
-          <div className="w-1/2">
+          <div className="w-1/2 overflow-auto max-h-[600px]">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/speed-highlight/core/dist/themes/dark.css" />
             <pre ref={htmlViewRef}>{htmlContent}</pre>
           </div>

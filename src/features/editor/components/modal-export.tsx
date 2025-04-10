@@ -14,16 +14,13 @@ import { toast } from 'sonner'
 
 export function ModalExport() {
   const htmlViewRef = useRef<HTMLPreElement>(null)
-  const sectionListRef = useRef<Handle>(null)
   const [htmlContent, setHtmlContent] = useState('')
 
   const copyToClipboard = () => {
-    if (sectionListRef.current) {
-      navigator.clipboard.writeText(sectionListRef.current.getHTMLContent())
-      toast('✅ Copied to clipboard!', {
-        position: 'top-right',
-      })
-    }
+    navigator.clipboard.writeText(htmlContent)
+    toast('✅ Copied to clipboard!', {
+      position: 'top-right',
+    })
   }
 
   useEffect(() => {
@@ -44,7 +41,7 @@ export function ModalExport() {
 
         <div className="flex">
           <div className="w-1/2">
-            <SectionListReadOnly ref={sectionListRef} onHtmlChange={setHtmlContent} />
+            <SectionListReadOnly onHtmlChange={setHtmlContent} />
           </div>
           <div className="w-1/2 overflow-auto max-h-[600px]">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/speed-highlight/core/dist/themes/dark.css" />

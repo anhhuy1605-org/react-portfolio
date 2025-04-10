@@ -9,12 +9,11 @@ export interface Handle {
 }
 
 interface Props {
-  ref: Ref<Handle>
   onHtmlChange?: (html: string) => void
 }
 
 // TODO: combine with SectionList
-export function SectionListReadOnly({ ref, onHtmlChange }: Props) {
+export function SectionListReadOnly({ onHtmlChange }: Props) {
   const [iframeRef, setIframeRef] = useState<HTMLIFrameElement | null>(null)
   const sections = useEditorStore(state => state.sections)
   const globalBackgroundColor = useEditorStore(state => state.globalSection?.backgroundColor)
@@ -25,12 +24,6 @@ export function SectionListReadOnly({ ref, onHtmlChange }: Props) {
     padding: '16px',
     backgroundColor: globalBackgroundColor,
   }
-
-  useImperativeHandle(ref, () => ({
-    getHTMLContent() {
-      return tidyHTML(iframeRef?.contentWindow?.document?.documentElement?.outerHTML ?? '')
-    },
-  }), [iframeRef])
 
   useEffect(() => {
     if (onHtmlChange) {
